@@ -1,0 +1,11 @@
+{
+  "tag": "v0.3.3",
+  "tested_source_commit": "dea27e8527cfbce84916922ba43d4e44251ef4b9",
+  "workflow_run": "https://github.com/njjjna/veriflow-quality-platform/actions/runs/45014731360",
+  "browser_cases_passed": 23,
+  "screenshots": 11,
+  "api": "passed",
+  "browser": "passed",
+  "data": "synthetic only",
+  "application_public_deployment": false
+}
