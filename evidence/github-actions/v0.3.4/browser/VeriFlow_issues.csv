@@ -1,0 +1,5 @@
+﻿id,title,severity,status,assignee_id,due_date,resolution_notes,retest_notes
+61c33017ff4046818c4d16c088d0c529,第5行 · institution_name_missing,medium,open,,,,
+cd2a6cb0dc6e477eb5a39f5a3c1b779c,第6行 · success_rate_out_of_range,medium,open,,,,
+23b900823f284e5b9c7f855574aa37d0,第13行 · institution_id_duplicate,medium,open,,,,
+632c568e02e1433398791bdb5a053526,浏览器UAT新增工单-a1e2a97a3d,high,closed,6845012f125b483487e01659f73fac5e,,已修复模拟接口超时，证据编号 FIX-001,独立复测模拟接口通过，证据编号 RETEST-001

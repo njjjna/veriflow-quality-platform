@@ -1,0 +1,22 @@
+TAP version 13
+# Subtest: release submits confirmations, evidence and risk notes
+ok 1 - release submits confirmations, evidence and risk notes
+  ---
+  duration_ms: 2.155982
+  type: 'test'
+  ...
+# Subtest: release displays a server rejection without claiming success
+ok 2 - release displays a server rejection without claiming success
+  ---
+  duration_ms: 1.334539
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 43.591239
