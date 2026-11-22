@@ -1,10 +1,10 @@
-name: Verify and publish v0.3.3
+name: Verify and publish v0.3.4
 on:
   workflow_dispatch:
 permissions:
   contents: write
 concurrency:
-  group: veriflow-release-v0.3.3
+  group: veriflow-release-v0.3.4
   cancel-in-progress: false
 jobs:
   verified-release:
@@ -44,7 +44,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: veriflow-v0.3.3-release-diagnostics
+          name: veriflow-v0.3.4-release-diagnostics
           path: |
             test-artifacts/release-checks/
             test-artifacts/release-run/
