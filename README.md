@@ -1,4 +1,4 @@
-# VeriFlow · Enterprise-style quality & UAT workflow MVP (v0.3.3-rc.1)
+# VeriFlow · Enterprise-style quality & UAT workflow MVP (v0.3.3)
 
 > **定位**：可本地复现的企业质量管理作品集；**不是经审计的生产安全系统**。这是独立实现版本，不会自动覆盖之前的 ChatGPT Sites 私人演示网站。
 >
@@ -7,7 +7,9 @@
 
 ## 0. 当前候选版本与云端验收
 
-本轮状态见 [`docs/CLOUD_UAT_2026-11-22.md`](docs/CLOUD_UAT_2026-11-22.md)。已修复审批表单提交、隔离API/浏览器测试数据库，并补齐测试依赖。**后端20项、HTTP流程15项、前端提交处理2项已通过；当前Work云浏览器仍被访问策略阻断，浏览器UAT与GitHub发布尚未完成。**
+**真实云端Chromium UAT已通过23/23；后端20项、HTTP流程15项、前端提交处理2项均通过。** 首次通过的提交是 `8e0d2a78364cb760934c73f1f21f8e8d99ef7606`，见 [Chromium UAT](https://github.com/njjjna/veriflow-quality-platform/actions/runs/45013807096) 和 [同提交回归检查](https://github.com/njjjna/veriflow-quality-platform/actions/runs/45013807061)。
+
+专用仓库为私有，应用未向公网部署。发布流程会对最终源码重新运行全套测试，再将截图、CSV、报告与运行元数据归档至 `evidence/github-actions/v0.3.3/`，创建 `v0.3.3` Tag与Release，并附源码包及证据包。最新结果见 [云端验收报告](docs/CLOUD_UAT_2026-11-22.md)。
 
 无需Docker的独立云运行器复现方式（仅模拟数据）：
 
@@ -19,7 +21,7 @@ node --test tests/frontend_release.test.cjs
 python scripts/run_isolated_uat.py --suite all
 ```
 
-每个API/浏览器套件使用全新临时SQLite、随机管理员密码和独立附件目录，运行结束自动停止服务。结果与截图在 `test-artifacts/isolated/<run-id>/`；以本次 `run_summary.json` 和 `browser/browser_result.json` 为准。仅需后端时用 `--suite api`，它会明确记录 `browser: not_run`。浏览器脚本包含五种业务角色、工单整改与复测、证据预览、CSV、8项UAT、上线门禁和双人审批；**脚本已扩展、尚未实际运行通过**。GitHub推送后将自动执行 `.github/workflows/browser.yml`。
+每个API/浏览器套件使用全新临时SQLite、随机管理员密码和独立附件目录，运行结束自动停止服务。结果与截图在 `test-artifacts/isolated/<run-id>/`；以本次 `run_summary.json` 和 `browser/browser_result.json` 为准。仅需后端时用 `--suite api`，它会明确记录 `browser: not_run`。浏览器脚本包含五种业务角色、工单整改与复测、证据预览、CSV、8项UAT、上线门禁和双人审批；**23项浏览器检查已在GitHub运行器实际通过**。GitHub推送后将自动执行 `.github/workflows/browser.yml`。
 
 ### Windows个人电脑可选路径（无需公网）
 
@@ -43,7 +45,7 @@ python scripts/run_isolated_uat.py --suite all
 
 **自动浏览器测试：** 启动本机服务并准备一次性管理员账号，在PowerShell中设置 `VERIFLOW_UI_URL`、`VERIFLOW_UI_EMAIL`、`VERIFLOW_UI_PASSWORD`，运行 `python scripts/browser_uat.py`。该脚本会向测试数据库增加模拟用户/工单，不允许在真实业务库运行。浏览器首次安装执行 `python -m playwright install chromium`。完整步骤见 `docs/LOCAL_UAT_GUIDE.md`。
 
-**测试结果区分：** 当前已完成20项pytest、15项本机HTTP多角色集成验证和2项前端审批处理回归；本执行环境的Chromium因浏览器网络访问策略返回`ERR_BLOCKED_BY_ADMINISTRATOR`，故真正的浏览器自动化UAT和人工UAT仍待在本地Windows或GitHub Actions中执行，不应标注为已通过。详见 `docs/LOCAL_TEST_REPORT.md`。
+**测试结果区分：** GitHub Actions已实际完成23项Chromium页面检查，包含账号、工单、附件、数据质量、UAT、上线审批、审计和窄屏总览。原生另存为弹窗、其他浏览器和完整可访问性仍需另行验收。Work云浏览器访问回环地址曾受环境策略阻断；这一限制不影响独立GitHub运行器中的实际测试结果。
 
 ---
 
@@ -132,7 +134,7 @@ pytest -q
 node --test tests/frontend_release.test.cjs
 ```
 
-测试使用独立临时数据库，覆盖原有登录、权限、CSRF、项目隔离、工单、UAT、质量规则、CSV导出，以及演示/严格职责模式、附件上传/越权/预览、上线门禁与双人审批。**尚未完成人工浏览器UAT**。
+测试使用独立临时数据库，覆盖原有登录、权限、CSRF、项目隔离、工单、UAT、质量规则、CSV导出，以及演示/严格职责模式、附件上传/越权/预览、上线门禁与双人审批。**自动化Chromium UAT已通过；最终使用者的29项人工签署清单仍待填写**。
 
 ## 6. 目录
 
@@ -169,7 +171,7 @@ app/
 
 ## 8. 发布状态（请勿混淆）
 
-- **本仓库代码**：v0.3.3-rc.1，后端20项、HTTP流程15项、前端提交处理2项通过；浏览器UAT和GitHub发布待完成。
+- **本仓库代码**：v0.3.3，后端20项、HTTP流程15项、前端提交处理2项通过；23项Chromium UAT通过；发布流程在最终源码复测通过后生成Tag与Release。
 - **此前 Sites 私人网址**：是旧前端原型，未因本包的生成自动更新。
 - **公网生产上线**：未实施；不应宣称完成渗透测试、运维SLA或真实企业客户验证。
 
@@ -187,9 +189,9 @@ License: MIT（见 `LICENSE`）。
 
 查看 [`docs/DEPLOY_GITHUB.md`](docs/DEPLOY_GITHUB.md)。含完整GitHub初始化、Railway + PostgreSQL部署变量、持久化证据存储、账户初始化、云端验收与原站点升级的限制说明。
 
-提供 `railway.json`、`scripts/api_smoke.py` 和 `scripts/browser_smoke.py`；CI除了`pytest`还检查前端JavaScript语法，并提供可在GitHub Actions运行的Chromium浏览器冒烟测试（目前尚未触发云端运行）。**云端发布、GitHub仓库创建以及原Sites站点升级仍待真实服务授权，不因生成文件而自动完成。**
+提供 `railway.json`、`scripts/api_smoke.py` 和 `scripts/browser_smoke.py`；CI除了`pytest`还检查前端JavaScript语法，并提供可在GitHub Actions运行的Chromium浏览器冒烟测试（已在GitHub实际执行通过）。**GitHub私有仓库已创建并上传；应用没有部署公网，原Sites站点未升级。**
 
 
 ## 12. v0.3.2本地UAT工程化
 
-新增 `scripts/live_api_uat.py`（端到端真实HTTP角色流程验证）、`scripts/browser_uat.py`（真实Chromium页面操作，待在允许浏览器访问本地服务的环境中执行）、`scripts/start_local.ps1`与`scripts/stop_local.ps1`（Windows Docker启停），以及运行记录和操作指南。用户创建后，角色分配下拉框会立即更新，不必手动刷新页面。
+新增 `scripts/live_api_uat.py`（端到端真实HTTP角色流程验证）、`scripts/browser_uat.py`（真实Chromium页面操作，已在GitHub运行器执行通过）、`scripts/start_local.ps1`与`scripts/stop_local.ps1`（Windows Docker启停），以及运行记录和操作指南。用户创建后，角色分配下拉框会立即更新，不必手动刷新页面。

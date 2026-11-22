@@ -149,7 +149,7 @@ def create_app(database_url: str | None = None, mode: str | None = None, upload_
             raise RuntimeError("生产模式检测到已有多角色成员；须先执行数据治理，禁止直接切换模式")
     evidence_dir = Path(upload_dir or os.environ.get("VERIFLOW_UPLOAD_DIR", "./.veriflow_uploads")).resolve()
     evidence_dir.mkdir(parents=True, exist_ok=True)
-    app = FastAPI(title="VeriFlow", version="0.3.3-rc.1", docs_url=None, redoc_url=None)
+    app = FastAPI(title="VeriFlow", version="0.3.3", docs_url=None, redoc_url=None)
     app.state.SessionFactory = SessionFactory
     app.state.mode = mode
     app.state.upload_dir = evidence_dir
@@ -232,7 +232,7 @@ def create_app(database_url: str | None = None, mode: str | None = None, upload_
         return FileResponse(Path(__file__).parent.parent / "data" / "sample_institutions_clean.csv", media_type="text/csv")
 
     @app.get("/api/health")
-    def health(): return {"status": "ok", "version": "0.3.3-rc.1", "synthetic_only": True, "mode": mode}
+    def health(): return {"status": "ok", "version": "0.3.3", "synthetic_only": True, "mode": mode}
 
     @app.post("/api/auth/login")
     def login(payload: LoginRequest, response: Response, db: DBSession = Depends(get_db)):
