@@ -1,0 +1,4 @@
+node --check app/static/app.js: exit 0
+python -m py_compile scripts/browser_uat.py scripts/run_isolated_uat.py: exit 0
+GitHub workflow YAML: parsed ci.yml and browser.yml
+These checks do not establish browser UAT success.

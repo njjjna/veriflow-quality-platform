@@ -1,0 +1,5 @@
+PASS /api/health 200
+PASS / 200
+PASS /app.js 200
+PASS /style.css 200
+PASS /api/projects -> 401 (未登录被拒绝)

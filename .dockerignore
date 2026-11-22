@@ -1,0 +1,17 @@
+**/__pycache__/
+**/*.pyc
+.git/
+.github/
+.pytest_cache/
+.venv/
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite
+*.sqlite3
+.veriflow_uploads/
+docs/
+tests/
+*.zip
+*.bundle

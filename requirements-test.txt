@@ -1,0 +1,2 @@
+# Used by test_image_attachment_preview_and_unauthorized_type.
+Pillow==13.0.0

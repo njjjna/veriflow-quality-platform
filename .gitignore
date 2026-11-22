@@ -1,0 +1,16 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+*.db
+.env
+.venv/
+*.sqlite3
+coverage.xml
+.veriflow_uploads/
+
+# Generated local test artifacts and exports
+test-artifacts/
+ci_veriflow.db
+
+test-artifacts/
+*.log

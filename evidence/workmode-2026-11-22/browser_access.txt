@@ -1,0 +1,3 @@
+2026-11-22 UTC+8; cloud browser tab 2; target http://127.0.0.1:8766/
+Observed result: Browser Use rejected this action due to browser security policy. The browser URL policy blocks this action.
+No application DOM or UAT screenshot captured. No workaround attempted.

@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"  # local demo only: do not expose directly to public internet
+    environment:
+      DATABASE_URL: sqlite:////data/veriflow.db
+      COOKIE_SECURE: "false"
+      VERIFLOW_MODE: "demo"       # local development only
+      VERIFLOW_UPLOAD_DIR: /data/uploads
+    volumes:
+      - veriflow_data:/data
+    restart: unless-stopped
+volumes:
+  veriflow_data:

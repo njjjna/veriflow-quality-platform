@@ -1,0 +1,10 @@
+✔ release submits confirmations, evidence and risk notes (3.773103ms)
+✔ release displays a server rejection without claiming success (1.346682ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 102.841146

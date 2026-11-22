@@ -1,0 +1,13 @@
+institution_id,institution_name,system_code,status,success_rate,go_live_date
+H001,朝阳模拟医院,HIS-A,active,98.2,2026-11-01
+H002,海淀模拟医院,HIS-B,testing,96.7,2026-11-03
+H003,东城模拟医院,HIS-C,active,99.5,2026-11-05
+H004,安康模拟医院,HIS-D,testing,96.0,2026-11-06
+H005,西城模拟医院,HIS-E,active,99.0,2026-11-07
+H006,丰台模拟医院,HIS-F,inactive,90,2026-11-09
+H007,昌平模拟医院,HIS-G,active,95.0,2026-11-10
+H008,顺义模拟医院,HIS-H,testing,97.1,2026-11-12
+H009,通州模拟医院,HIS-I,active,99.1,2026-11-13
+H010,石景山模拟医院,HIS-J,active,99.2,2026-11-14
+H011,房山模拟医院,HIS-K,testing,98.5,2026-11-15
+H012,门头沟模拟医院,HIS-L,active,97.2,2026-11-16
