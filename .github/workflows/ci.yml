@@ -1,0 +1,22 @@
+name: API and static checks
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt -r requirements-test.txt
+      - name: Run Python tests
+        run: pytest -q
+      - name: Check frontend JavaScript syntax
+        run: node --check app/static/app.js
+      - name: Test frontend release submit handler
+        run: node --test tests/frontend_release.test.cjs
