@@ -65,8 +65,10 @@ def run():
             admin.on('pageerror',lambda e: js_errors.append(str(e)))
             login(admin,EMAIL,PASS)
             expect(admin.get_by_role('heading',name='质量总览')).to_be_visible()
+            expected_version=admin.request.get(URL+'/api/health').json()['version']
+            expect(admin.locator('#app-version')).to_have_text('v'+expected_version)
             admin.screenshot(path=str(PATH/'01_dashboard.png'),full_page=True)
-            ok('真实页面登录并呈现项目总览')
+            ok('真实页面登录并呈现项目总览，页脚版本与后端一致')
             nav(admin,'用户与权限')
             expect(admin.get_by_role('heading',name='用户与项目权限')).to_be_visible()
             suffix=uuid.uuid4().hex[:10]

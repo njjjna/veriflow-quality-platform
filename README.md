@@ -1,4 +1,4 @@
-# VeriFlow · Enterprise-style quality & UAT workflow MVP (v0.3.3)
+# VeriFlow · Enterprise-style quality & UAT workflow MVP (v0.3.4)
 
 > **定位**：可本地复现的企业质量管理作品集；**不是经审计的生产安全系统**。这是独立实现版本，不会自动覆盖之前的 ChatGPT Sites 私人演示网站。
 >
@@ -9,7 +9,7 @@
 
 **真实云端Chromium UAT已通过23/23；后端20项、HTTP流程15项、前端提交处理2项均通过。** 首次通过的提交是 `8e0d2a78364cb760934c73f1f21f8e8d99ef7606`，见 [Chromium UAT](https://github.com/njjjna/veriflow-quality-platform/actions/runs/45013807096) 和 [同提交回归检查](https://github.com/njjjna/veriflow-quality-platform/actions/runs/45013807061)。
 
-专用仓库为私有，应用未向公网部署。发布流程会对最终源码重新运行全套测试，再将截图、CSV、报告与运行元数据归档至 `evidence/github-actions/v0.3.3/`，创建 `v0.3.3` Tag与Release，并附源码包及证据包。最新结果见 [云端验收报告](docs/CLOUD_UAT_2026-11-22.md)。
+专用仓库为私有，应用未向公网部署。发布流程会对最终源码重新运行全套测试，再将截图、CSV、报告与运行元数据归档至 `evidence/github-actions/v0.3.4/`，创建 `v0.3.4` Tag与Release，并附源码包及证据包。最新结果见 [云端验收报告](docs/CLOUD_UAT_2026-11-22.md)。
 
 无需Docker的独立云运行器复现方式（仅模拟数据）：
 
@@ -171,7 +171,7 @@ app/
 
 ## 8. 发布状态（请勿混淆）
 
-- **本仓库代码**：v0.3.3，后端20项、HTTP流程15项、前端提交处理2项通过；23项Chromium UAT通过；发布流程在最终源码复测通过后生成Tag与Release。
+- **本仓库代码**：v0.3.4，后端20项、HTTP流程15项、前端提交处理2项通过；23项Chromium UAT通过；发布流程在最终源码复测通过后生成Tag与Release。
 - **此前 Sites 私人网址**：是旧前端原型，未因本包的生成自动更新。
 - **公网生产上线**：未实施；不应宣称完成渗透测试、运维SLA或真实企业客户验证。
 

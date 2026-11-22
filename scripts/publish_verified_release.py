@@ -1,4 +1,4 @@
-"""Publish v0.3.3 only after a successful, manually dispatched GitHub release run.
+"""Publish v0.3.4 only after a successful, manually dispatched GitHub release run.
 
 Uses the runner's short-lived GH_TOKEN, never a personal access token. Stores only
 synthetic screenshots, test output, and commit provenance in the private repo.
@@ -13,7 +13,7 @@ import subprocess
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-TAG = 'v0.3.3'
+TAG = 'v0.3.4'
 REPO = 'njjjna/veriflow-quality-platform'
 
 
@@ -68,7 +68,7 @@ def main():
     command('git', 'add', 'SHA256SUMS.txt')
     command('git', '-c', 'user.name=github-actions[bot]',
             '-c', 'user.email=41898282+github-actions[bot]@users.noreply.github.com',
-            'commit', '-m', 'docs: retain verified v0.3.3 browser UAT evidence')
+            'commit', '-m', 'docs: retain verified v0.3.4 browser UAT evidence')
     release_commit = output('git', 'rev-parse', 'HEAD')
     # This commit adds evidence and the manifest only. The tested app files do
     # not change between source and the release target.
@@ -79,25 +79,25 @@ def main():
 
     dist = ROOT / 'dist'
     dist.mkdir(exist_ok=True)
-    source_zip = dist / 'VeriFlow_v0.3.3_source_and_evidence.zip'
+    source_zip = dist / 'VeriFlow_v0.3.4_source_and_evidence.zip'
     with source_zip.open('wb') as stream:
         subprocess.run(['git','archive','--format=zip','--prefix=veriflow-enterprise/',release_commit],
                        cwd=ROOT, stdout=stream, check=True)
-    evidence_zip = dist / 'VeriFlow_v0.3.3_browser_UAT_evidence.zip'
+    evidence_zip = dist / 'VeriFlow_v0.3.4_browser_UAT_evidence.zip'
     with zipfile.ZipFile(evidence_zip,'w',zipfile.ZIP_DEFLATED) as archive:
         for path in sorted(evidence.rglob('*')):
             if path.is_file(): archive.write(path,path.relative_to(evidence))
     provenance = dist / 'RELEASE_PROVENANCE.json'
     provenance.write_text(json.dumps({**metadata,'release_commit':release_commit},indent=2) + '\n')
-    notes = (ROOT / 'docs/RELEASE_NOTES_v0.3.3.md').read_text()
+    notes = (ROOT / 'docs/RELEASE_NOTES_v0.3.4.md').read_text()
     notes += f'\nTested source: `{source}`\n\nRelease commit (evidence only): `{release_commit}`\n\nVerification run: {run_url}\n'
-    notes_file = dist / 'VeriFlow_v0.3.3_release_report.md'
+    notes_file = dist / 'VeriFlow_v0.3.4_release_report.md'
     notes_file.write_text(notes)
     checksums = dist / 'SHA256SUMS_release.txt'
     files = [source_zip,evidence_zip,provenance,notes_file]
     checksums.write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name+'\n' for p in files))
     command('gh','release','create',TAG,'--repo',REPO,'--target',release_commit,
-            '--title','VeriFlow v0.3.3 — verified cloud browser UAT',
+            '--title','VeriFlow v0.3.4 — verified cloud browser UAT',
             '--notes-file',str(notes_file),*[str(p) for p in files],str(checksums))
     release = json.loads(output('gh','release','view',TAG,'--repo',REPO,'--json','url,tagName,assets'))
     if len(release['assets']) != 5:

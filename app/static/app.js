@@ -31,7 +31,7 @@ function topActions(){
   document.querySelectorAll('[data-page]').forEach(x=>x.onclick=async()=>{S.page=x.dataset.page;await render()});
 }
 async function boot(){
-  try{const health=await api('/api/health');S.mode=health.mode;S.me=await api('/api/auth/me');S.csrf=S.me.csrf_token;
+  try{const health=await api('/api/health');S.mode=health.mode;$('app-version').textContent=`v${health.version}`;S.me=await api('/api/auth/me');S.csrf=S.me.csrf_token;
     if(S.me.must_change_password){showChangePassword();return}await loadProjects();}
   catch(e){showLogin();}
 }
